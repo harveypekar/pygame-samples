@@ -15,6 +15,10 @@ If you have looked at the samples, you will have noticed there is a lot of code 
 
 The alternative would have been to create a separate file with common code, and to only have the specific code to a sample in that file. This would have been the `correct` way in a professional project, but everything would be spread around. 
 
+## Structure
+
+All the documentation of the samples are in this document (for easy browsing and searching), or comments in the code. The samples are organized in folders. Eg in the folder `basic`, you'll find all the samples to get a cube moving on a screen. In the folder `utility`, you'll find various little techniques (such as an FPS counter). In the folder `games`, you'll find very basic implementations of various kinds of games (platformer, infinite runner....)
+
 
 ## Basic samples
 
@@ -94,4 +98,32 @@ Now, if you would only use these commands, you won't see any magenta or cyan yet
 
 This tell pygame to put our image on the screen, and the other one will become the variable `screen`, ready to be drawn to next.
 
-![Hurray!](images/02-screen.png)
+![](images/02-screen.png)
+
+So that's it! Your game should have three steps 
+
+1. Clear the image
+2. Draw what you need to draw
+3. Flip
+
+You only need to flip when you're done. You always draw everything again. You might think this is inefficient (why not only draw what changed?). It's a very long explanation, but every game, from the smallest indie game to the biggest AAA game does it this way. Because it works, and avoids bugs.
+
+For the nerdy (which should be all of you), some extra notes:
+
+* In proper terminology, we call the image we draw to as the `backbuffer`
+* The speed at which we draw images and `flip` them, is called `frames per second` or `FPS`. If we can draw 50 images in one second, we have 50 FPS
+* I've confused you with the terms canvas, image, (back)buffer, screen. I'm sorry. All these terms are used for the same thing. At least you know now
+* Why choose magenta to clear the screen? So it's really easy to see if you have any 'holes' in your drawing. Games want to fill the entire screen with nice art, and we want to know if part of the screen is not drawn to. We use magenta, because it's very obvious to the eye, and it's very uncommon to have magenta legitimately in an image. That's because [magenta doesn't exist](https://www.bbc.com/reel/playlist/a-fairer-world?vpid=p0f00wph)
+
+### 03-input-keyboard
+
+This sample demonstrated how to get the state of the keyboard. It uses the `SPACEBAR` key to move the rectangle right. It's based on the previous sample.
+
+First, we make the position on the x-axis (left-right) of the rectangle a variable:
+
+``` python
+# X position of the rectangle, initially completely to the left
+rect_x = 0
+```
+
+We also modify the call to `pygame.draw.rect` to use the variable 
